@@ -1,0 +1,11 @@
+/* Crab Siege: the cove at dusk. The deep teal of the icon's water, the crabs' coral red in the glow, warm sand for the
+   accent. Only colours live here; layout comes from the shared kk.css and game.css (synced from kettlekite-site). */
+:root {
+  --bg: #0a1a20;
+  --hero-1: #1f7b88;
+  --hero-2: #0f3d48;
+  --glow: rgba(232, 84, 102, 0.28);
+  --tint: rgba(110, 200, 205, 0.12);
+  --sister-tint: rgba(232, 84, 102, 0.14);
+  --accent: #f3d98a;
+}

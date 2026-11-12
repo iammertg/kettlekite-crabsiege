@@ -6,6 +6,10 @@
 <title>Crab Siege: Island Defense</title>
 <meta name="description" content="Chop palms, stack gold and raise towers, gates and cannons to hold your cove against the crabs: an island-defense game for iPhone, by Kettlekite.">
 <meta name="theme-color" content="#0a1a20">
+<link rel="canonical" href="https://crabsiege.kettlekite.com/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://crabsiege.kettlekite.com/">
+<meta property="og:site_name" content="Kettlekite">
 <meta property="og:title" content="Crab Siege: Island Defense">
 <meta property="og:description" content="Chop, build and hold the cove: an island-defense game for iPhone.">
 <meta property="og:image" content="https://crabsiege.kettlekite.com/assets/media/og.jpg">
@@ -17,6 +21,7 @@
 <link rel="stylesheet" href="/assets/kk.css">
 <link rel="stylesheet" href="/assets/game.css">
 <link rel="stylesheet" href="/assets/theme.css">
+<link rel="stylesheet" href="/assets/site.css">
 <style>
   /* the game's captures already carry the Dynamic Island, so the frame draws none of its own */
   .phone::before { display: none; }
@@ -26,8 +31,9 @@
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <header class="bar">
-  <a class="brand" href="/"><img src="/assets/icon.png" alt="" width="34" height="34">Crab Siege</a>
+  <a class="brand" href="/" translate="no"><img src="/assets/icon.png" alt="" width="34" height="34">Crab Siege</a>
   <nav class="nav" aria-label="Site">
     <a href="#how">How it plays</a>
     <a href="#cove">The cove</a>
@@ -35,9 +41,9 @@
   </nav>
 </header>
 
-<main>
+<main id="main">
   <section class="g-hero">
-    <h1 class="g-name">Crab Siege</h1>
+    <h1 class="g-name" translate="no">Crab Siege</h1>
     <div class="g-device"><div class="phone"><img src="/assets/media/hero.jpg" width="660" height="1435" alt="Stage 1 of Crab Siege: the final wave announced above a gate on the sand path, with a bamboo watchtower on each side."></div></div>
     <div class="g-copy wrap">
       <div>
@@ -45,7 +51,7 @@
         <p class="g-sub">An island-defense game for iPhone.</p>
       </div>
       <div class="g-cta">
-        <div class="actions"><a class="btn solid" href="https://apps.apple.com/app/id6828224819">Download on the App Store</a></div>
+        <div class="actions"><span class="btn soon">Coming soon to the App Store</span></div>
         <a class="help" href="/support">Get help</a><br>
         <a class="studio-mark" href="https://kettlekite.com"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3 L56 26 L32 61 Z" fill="#5fa59a"/><path d="M32 3 L8 26 L32 61 Z" fill="#f0a92e"/></svg>A Kettlekite game</a>
       </div>
@@ -110,7 +116,7 @@
     <div class="sisters">
       <a class="sister rise" href="https://sundaejam.kettlekite.com">
         <img src="/assets/media/sundae-icon.png" alt="" width="72" height="72">
-        <span><strong>Sundae Jam</strong><span>Clear the counter, serve the sundaes: a dessert puzzle.</span></span>
+        <span><strong>Sundae Jam</strong><span>Clear the counter, serve the sundaes: a dessert puzzle. Out now on the App Store.</span></span>
       </a>
       <a class="sister rise" href="https://vanityjam.kettlekite.com">
         <img src="/assets/media/vanity-icon.png" alt="" width="72" height="72">
@@ -122,7 +128,7 @@
 
 <footer class="foot">
   <div class="wrap">
-    <p>Crab Siege is a <a href="https://kettlekite.com">Kettlekite</a> game. © 2026 Mert Can Gözükara</p>
+    <p>Crab&nbsp;Siege is a <a href="https://kettlekite.com">Kettlekite</a> game. © 2026 Mert&nbsp;Can&nbsp;Gözükara</p>
     <ul>
       <li><a href="/support">Support</a></li>
       <li><a href="/privacy">Privacy policy</a></li>
@@ -131,5 +137,6 @@
   </div>
 </footer>
 <script src="/assets/game.js" defer></script>
+<script src="/assets/site.js" defer></script>
 </body>
 </html>

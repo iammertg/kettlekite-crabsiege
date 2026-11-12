@@ -1,0 +1,55 @@
+/* Details on top of the shared kk.css and game.css. Those two are synced from kettlekite-site (scripts/sync-shared.sh)
+   and would lose anything written into them here, so this file holds the polish instead. It is the same on every game
+   site; fold it into kk.css / game.css in kettlekite-site when convenient, then delete it. */
+
+/* The page's own surfaces: selection, scrollbar, taps */
+html { scrollbar-color: var(--ivory-3) var(--bg); -webkit-tap-highlight-color: transparent; }
+::selection { background: color-mix(in srgb, var(--accent) 38%, transparent); color: var(--ivory); }
+a, button { touch-action: manipulation; }
+.quiet, .foot { color: rgba(244, 235, 221, 0.58); } /* 4.5:1 on every game's ground (0.5 fell just short on Vanity's) */
+
+/* Skip link: out of sight until a keyboard reaches it */
+.skip {
+  position: fixed; z-index: 60; top: 0.75rem; left: var(--gutter); padding: 0.75rem 1.2rem; border-radius: 999px;
+  background: var(--ivory); color: var(--ink); font-weight: 600; font-size: 1rem; text-decoration: none; transform: translateY(-300%);
+}
+.skip:focus-visible { transform: none; border-radius: 999px; }
+
+/* 44 px for a finger with no visual shift: padding grows the target, a negative margin gives the space back */
+.brand { padding-block: 5px; margin-block: -5px; }
+.nav a { padding-block: 11px; margin-block: -11px; }
+.g-cta .help { padding-block: 8px; margin-block: calc(0.9rem - 8px) -8px; }
+.studio-mark { padding-block: 10px; margin-block: calc(1.4rem - 10px) -10px; }
+.calm a { display: inline-block; padding-block: 10px; margin-block: -10px; }
+.foot a { display: inline-block; padding-block: 12px; margin-block: -12px; }
+.nav a[aria-current="page"] { color: var(--ivory); }
+
+/* Trick pictures stay square: a height attribute must not beat the aspect ratio */
+.trick img { height: auto; }
+
+/* Apple's own badge, unaltered, for a game that is out (as on kettlekite.com) */
+.store-badge { display: inline-flex; border-radius: 9px; }
+.store-badge img { width: auto; height: 3rem; }
+.store-badge:focus-visible { border-radius: 10px; }
+
+/* Press and hover: everything clickable answers on press; only links move, and never far */
+a.btn, .store-badge, .sister { transition: transform 0.16s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease); }
+a.btn:active, .store-badge:active { transform: scale(0.97); }
+.sister:active { transform: scale(0.985); }
+@media (hover: hover) and (pointer: fine) {
+  .store-badge:hover { transform: translateY(-1px); }
+  .sister:hover { transform: translateY(-2px); }
+}
+
+/* Blocks rise a little less far and a little sooner; with scripting off they are simply there */
+.rise { transform: translateY(1.25rem); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+@media (scripting: none) { .rise { opacity: 1; transform: none; } }
+
+/* Phones: the props gather round the phone and leave the words under it clear */
+@media (max-width: 860px) {
+  .g-scene { inset: 0 0 auto 0; height: 64%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise { opacity: 1; transform: none; }
+}

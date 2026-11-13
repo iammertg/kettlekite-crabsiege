@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Crab Siege: Island Defense</title>
-<meta name="description" content="Chop palms, stack gold and raise towers, gates and cannons to hold your cove against the crabs: an island-defense game for iPhone, by Kettlekite.">
+<meta name="description" content="Build towers, gates and cannons and hold your island cove against waves of crabs and a crowned King Crab: an island-defense game for iPhone.">
 <meta name="theme-color" content="#0a1a20">
 <link rel="canonical" href="https://crabsiege.kettlekite.com/">
 <meta property="og:type" content="website">
@@ -14,8 +14,8 @@
 <meta property="og:description" content="Chop, build and hold the cove: an island-defense game for iPhone.">
 <meta property="og:image" content="https://crabsiege.kettlekite.com/assets/media/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/assets/icon.png" type="image/png">
-<link rel="apple-touch-icon" href="/assets/icon.png">
+<link rel="icon" href="/assets/icon-96.png" type="image/png">
+<link rel="apple-touch-icon" href="/assets/icon-180.png">
 <link rel="preload" href="/assets/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
 <link rel="stylesheet" href="/assets/kk.css">
@@ -25,18 +25,40 @@
 <style>
   /* the game's captures already carry the Dynamic Island, so the frame draws none of its own */
   .phone::before { display: none; }
+  /* the crabs: six kinds, each with the line the game itself shows for it */
+  .crabs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 2.5vw, 2rem); }
+  .crab { display: grid; grid-template-rows: auto auto 1fr; padding: clamp(1.2rem, 2.4vw, 2rem); border-radius: 28px; background: radial-gradient(120% 90% at 100% 0%, var(--sister-tint), transparent 65%), rgba(244, 235, 221, 0.03); box-shadow: inset 0 0 0 1px var(--line); }
+  .crab img { width: auto; height: clamp(96px, 11vw, 150px); max-width: 100%; object-fit: contain; justify-self: center; margin-bottom: 1.2rem; filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.4)); }
+  .crab h3 { font-size: 1.7rem; font-weight: 350; margin-bottom: 0.4rem; letter-spacing: -0.02em; }
+  .crab p { color: var(--ivory-2); margin: 0; }
+  /* the defences: cut-outs over a soft glow, like the crabs, rather than bright squares */
+  .trick { background: radial-gradient(70% 55% at 50% 30%, var(--tint), transparent 72%), rgba(244, 235, 221, 0.03); }
+  .trick img { aspect-ratio: 16 / 10; object-fit: contain; padding: clamp(1.4rem, 3vw, 2.6rem) clamp(1.4rem, 3vw, 2.6rem) 0; filter: drop-shadow(0 22px 24px rgba(0, 0, 0, 0.4)); }
   /* two sister games in one block */
   .sisters { display: grid; gap: 1rem; margin: clamp(5rem, 11vw, 9rem) 0 clamp(4rem, 8vw, 6rem); }
   .sisters .sister { margin: 0; }
+  @media (max-width: 860px) {
+    /* phones: two crabs in each gutter beside the phone, clear of its pause button; the rest wait in the crab cards */
+    .g-scene .float:nth-child(1) { --x: 1% !important; --y: 44% !important; }
+    .g-scene .float:nth-child(2) { --x: 3% !important; --y: 22% !important; }
+    .g-scene .float:nth-child(4) { --x: 85% !important; --y: 66% !important; }
+    .g-scene .float:nth-child(5) { --x: 82% !important; --y: 46% !important; }
+    .g-scene .float:nth-child(3), .g-scene .float:nth-child(6), .g-scene .float:nth-child(7) { display: none; }
+    .crabs { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+    .crab { padding: 1rem 1rem 1.2rem; border-radius: 22px; }
+    .crab img { height: 84px; margin-bottom: 0.8rem; }
+    .crab h3 { font-size: 1.35rem; }
+    .crab p { font-size: 0.95rem; }
+  }
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="bar">
-  <a class="brand" href="/" translate="no"><img src="/assets/icon.png" alt="" width="34" height="34">Crab Siege</a>
+  <a class="brand" href="/" translate="no"><img src="/assets/icon-96.png" alt="" width="34" height="34">Crab Siege</a>
   <nav class="nav" aria-label="Site">
     <a href="#how">How it plays</a>
-    <a href="#cove">The cove</a>
+    <a href="#crabs">The crabs</a>
     <a href="/support">Support</a>
   </nav>
 </header>
@@ -44,7 +66,16 @@
 <main id="main">
   <section class="g-hero">
     <h1 class="g-name" translate="no">Crab Siege</h1>
-    <div class="g-device"><div class="phone"><img src="/assets/media/hero.jpg" width="660" height="1435" alt="Stage 1 of Crab Siege: the final wave announced above a gate on the sand path, with a bamboo watchtower on each side."></div></div>
+    <div class="g-scene" aria-hidden="true">
+      <img class="float" src="/assets/media/crabs/kingcrab.webp" width="420" height="368" alt="" style="--x:5%;--y:42%;--w:14%;--d:1.1;--r:-8deg">
+      <img class="float" src="/assets/media/crabs/leaper.webp" width="420" height="379" alt="" style="--x:20%;--y:37%;--w:7%;--d:1.6;--r:-16deg">
+      <img class="float" src="/assets/media/crabs/hermitcrab.webp" width="420" height="496" alt="" style="--x:26%;--y:58%;--w:7%;--d:0.7;--r:12deg">
+      <img class="float" src="/assets/media/crabs/bomber.webp" width="420" height="577" alt="" style="--x:66%;--y:44%;--w:6.5%;--d:0.8;--r:10deg">
+      <img class="float" src="/assets/media/crabs/runner.webp" width="420" height="300" alt="" style="--x:82%;--y:31%;--w:9%;--d:1.5;--r:-6deg">
+      <img class="float" src="/assets/media/crabs/swarm.webp" width="420" height="298" alt="" style="--x:75%;--y:60%;--w:7%;--d:1.2;--r:18deg">
+      <img class="float" src="/assets/media/crabs/crab.webp" width="420" height="300" alt="" style="--x:90%;--y:48%;--w:6%;--d:0.6;--r:-20deg">
+    </div>
+    <div class="g-device"><div class="phone"><video src="/assets/media/demo.mp4" poster="/assets/media/demo-poster.jpg" width="496" height="1078" autoplay muted loop playsinline preload="metadata" aria-label="Stage 10 of Crab Siege being played: the King Crab comes up the road with his crowd, and the captain and the towers stop him at the gate."></video></div></div>
     <div class="g-copy wrap">
       <div>
         <p class="g-lede">Chop, build and hold the cove.</p>
@@ -64,29 +95,44 @@
       <p>Drag anywhere to run, and the rest happens on its own: the captain chops, collects and swings.</p>
     </div>
     <ol class="beats">
-      <li class="beat rise" style="--tilt:-2deg"><div class="shot"><img src="/assets/media/chop.jpg" alt="Stage 1: the captain beside a palm tree, a gold mine and a thatched hut." loading="lazy"></div>
-        <h3>Chop and carry</h3><p>Your captain chops palms and scoops up the gold the crabs drop. It all piles up on their back.</p></li>
-      <li class="beat rise" style="--tilt:1.5deg"><div class="shot"><img src="/assets/media/build.jpg" alt="Stage 1 before the first wave: a gate across the sand path and two dashed squares marked Tower, each with its price." loading="lazy"></div>
-        <h3>Build where it says</h3><p>Stand on a dashed square and the stack pours in. A watchtower, a gate or a cannon pops up.</p></li>
-      <li class="beat rise" style="--tilt:-1deg"><div class="shot"><img src="/assets/media/win.jpg" alt="Victory card: three stars, Stage 1 cleared, and the gems earned." loading="lazy"></div>
-        <h3>Hold the line</h3><p>Crabs march up the sand path in waves. Clear the last one and the stage is yours, for up to three stars.</p></li>
+      <li class="beat rise" style="--tilt:-2deg"><div class="shot"><img src="/assets/media/build.jpg" width="660" height="1435" alt="Stage 22: the captain standing on the gate's square between two watchtowers, with a cannon square below and a fish seller at work." loading="lazy"></div>
+        <h3>Build where it says</h3><p>Stand still on a priced square and what you carry pours in. A watchtower, a gate or a cannon pops up.</p></li>
+      <li class="beat rise" style="--tilt:1.5deg"><div class="shot"><img src="/assets/media/wild.jpg" width="660" height="1435" alt="Stage 22 before the first wave: the captain out in the grass past the fence, fighting the crabs of a nest." loading="lazy"></div>
+        <h3>Head out past the fence</h3><p>Palms, gold rocks and crab nests wait outside the camp. A nest pays in sailors or a sharper cutlass, and lost islanders you walk home go to work for you.</p></li>
+      <li class="beat rise" style="--tilt:-1deg"><div class="shot"><img src="/assets/media/hold.jpg" width="660" height="1435" alt="Stage 22, wave 4 of 5: 56 crabs on the road, archers on two watchtowers and the captain fighting at the gate." loading="lazy"></div>
+        <h3>Hold the gate</h3><p>Crabs march up the road in waves. Archers shoot from the towers and the captain swings at the gate. Clear the last wave, for up to three stars.</p></li>
     </ol>
+  </section>
+
+  <section class="g-section wrap" id="crabs" aria-labelledby="crabs-title">
+    <div class="g-head rise">
+      <h2 id="crabs-title">Every crab has its answer.</h2>
+      <p>From stage 8, every stage tells you who is coming, so you know what to build first. Each island ends with the King Crab.</p>
+    </div>
+    <ul class="crabs">
+      <li class="crab rise"><img src="/assets/media/crabs/leaper.webp" width="420" height="379" alt="" loading="lazy"><h3>Leapers</h3><p>They jump the gate. A Gate Net stops them.</p></li>
+      <li class="crab rise"><img src="/assets/media/crabs/hermitcrab.webp" width="420" height="496" alt="" loading="lazy"><h3>Hermits</h3><p>Arrows bounce off their shells. A gun or the Boiling Pot gets through.</p></li>
+      <li class="crab rise"><img src="/assets/media/crabs/runner.webp" width="420" height="300" alt="" loading="lazy"><h3>Runners</h3><p>Fast. Road Spikes slow them down.</p></li>
+      <li class="crab rise"><img src="/assets/media/crabs/bomber.webp" width="420" height="577" alt="" loading="lazy"><h3>Bombers</h3><p>They blow up the gate. Shoot them on the road.</p></li>
+      <li class="crab rise"><img src="/assets/media/crabs/swarm.webp" width="420" height="298" alt="" loading="lazy"><h3>The Swarm</h3><p>Small and many. Cannons and the Boiling Pot.</p></li>
+      <li class="crab rise"><img src="/assets/media/crabs/kingcrab.webp" width="420" height="368" alt="" loading="lazy"><h3>The King Crab</h3><p>Huge, and crowned. A Harpoon or a gun hits hardest.</p></li>
+    </ul>
   </section>
 
   <section class="g-section wrap" id="cove" aria-labelledby="cove-title">
     <div class="g-head rise">
       <h2 id="cove-title">A cove worth holding.</h2>
-      <p>Towers and cannons for the beach, a gate for the path, and a King Crab stomping ashore every few stages.</p>
+      <p>Towers and cannons for the road, a gate across it, and more to build as the islands get harder.</p>
     </div>
     <div class="tricks">
-      <article class="trick rise"><img src="/assets/media/watchtower.jpg" alt="A bamboo watchtower with the captain on its platform." width="512" height="512" loading="lazy">
-        <div><h3>Watchtowers</h3><p>Bamboo towers rain stones on the crabs. Build one on its square, then upgrade it as the waves grow.</p></div></article>
-      <article class="trick rise"><img src="/assets/media/cannon.jpg" alt="A round stone tower with a black cannon on top." width="512" height="512" loading="lazy">
+      <article class="trick rise"><img src="/assets/media/watchtower.webp" alt="A bamboo watchtower with a lookout on its platform." width="387" height="560" loading="lazy">
+        <div><h3>Watchtowers</h3><p>Sailors shoot from the platform. Upgrade one and you choose: three archers for a crowd, or one gun that cracks shells.</p></div></article>
+      <article class="trick rise"><img src="/assets/media/cannon.webp" alt="A round stone tower with a black cannon on top." width="490" height="560" loading="lazy">
         <div><h3>Cannons</h3><p>A cannon hits a whole crowd at once, so it earns its place where the crabs bunch up.</p></div></article>
-      <article class="trick rise"><img src="/assets/media/gate.jpg" alt="A bamboo gate with a thatched top." width="512" height="512" loading="lazy">
-        <div><h3>The gate</h3><p>A gate shuts the path. The crabs have to stop and bash it, and your captain can walk straight through.</p></div></article>
-      <article class="trick rise"><img src="/assets/media/kingcrab.jpg" alt="A giant red crab with a golden crown and two huge claws." width="512" height="512" loading="lazy">
-        <div><h3>The King Crab</h3><p>Every few stages a giant, crowned crab comes up the beach. Bring your best gate.</p></div></article>
+      <article class="trick rise"><img src="/assets/media/gate.webp" alt="A bamboo gate with a thatched top." width="700" height="551" loading="lazy">
+        <div><h3>The gate</h3><p>A gate shuts the road, and the crabs have to stop and bash it. Hang a net on it when Leapers come.</p></div></article>
+      <article class="trick rise"><img src="/assets/media/boilingpot.webp" alt="A black pot of boiling orange broth over a fire, on a wooden frame." width="623" height="560" loading="lazy">
+        <div><h3>The Boiling Pot</h3><p>It scalds every crab at the gate and clears the crowd for you.</p></div></article>
     </div>
   </section>
 
@@ -97,9 +143,9 @@
     </div>
     <div class="shelf">
       <section class="rise" aria-labelledby="more-strong"><h3 id="more-strong">Get stronger</h3>
-        <p>Clear stages to unlock permanent captain perks. Start a stage with a Treasure Chest of coins, or call a Cannon Barrage or a Coconut Rush when a wave gets wild.</p></section>
+        <p>Clear stages to unlock permanent captain perks. Tap Rally and every tower shoots twice as fast for eight seconds, or call a Cannon Barrage or a Coconut Rush when a wave gets wild.</p></section>
       <section class="rise" aria-labelledby="more-grow"><h3 id="more-grow">Grow the cove</h3>
-        <p>Dig a gold mine and open a fish grill: villagers queue up and pay in coins. Hire a helper to keep the grill running while you fight, and clear the fog to open new land.</p></section>
+        <p>Dig a gold mine and open a fish grill: villagers queue up and pay in coins. Bring home a lost miner, fish seller or lumberjack to work while you fight, and open new land when the camp gets tight.</p></section>
       <section class="rise" aria-labelledby="more-back"><h3 id="more-back">Come back each day</h3>
         <p>Daily gifts and a Tiki Streak for winning in a row. Climb the Lighthouse or race rafts across the lagoon in events, and earn rewards on the Treasure Pass.</p></section>
     </div>
@@ -109,18 +155,18 @@
     <div class="calm rise">
       <h2 id="calm-title">Nothing to sign up for.</h2>
       <div>
-        <p>No account, no ads and no tracking. Your progress stays on your iPhone. Purchases go through the App Store, where Screen Time and Ask to Buy can limit them.</p>
+        <p>No account, no ads and no tracking. Your progress stays on your iPhone; Game Center, if you use it, sees only the stage you have reached. Purchases go through the App Store, where Screen Time and Ask to Buy can limit them.</p>
         <p><a href="/privacy">Read the privacy policy</a></p>
       </div>
     </div>
     <div class="sisters">
       <a class="sister rise" href="https://sundaejam.kettlekite.com">
-        <img src="/assets/media/sundae-icon.png" alt="" width="72" height="72">
+        <img src="/assets/media/sundae-icon.png" alt="" width="72" height="72" loading="lazy">
         <span><strong>Sundae Jam</strong><span>Clear the counter, serve the sundaes: a dessert puzzle. Out now on the App Store.</span></span>
       </a>
       <a class="sister rise" href="https://vanityjam.kettlekite.com">
-        <img src="/assets/media/vanity-icon.png" alt="" width="72" height="72">
-        <span><strong>Vanity Jam</strong><span>Tidy the messiest makeup drawer: a calm 3D sorting puzzle.</span></span>
+        <img src="/assets/media/vanity-icon.png" alt="" width="72" height="72" loading="lazy">
+        <span><strong>Vanity Jam</strong><span>Tidy the messiest makeup drawer: a calm 3D sorting puzzle. Coming soon to the App Store.</span></span>
       </a>
     </div>
   </section>

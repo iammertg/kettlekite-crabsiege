@@ -41,6 +41,19 @@ a.btn:active, .store-badge:active { transform: scale(0.97); }
   .sister:hover { transform: translateY(-2px); }
 }
 
+/* The hero film's pause button, beside the phone's top corner (site.js adds it) */
+.film-toggle {
+  position: absolute; top: 1.5rem; right: -3.75rem; width: 44px; height: 44px; display: grid; place-items: center;
+  border: 0; border-radius: 999px; background: rgba(244, 235, 221, 0.08); box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--ivory); cursor: pointer; transition: background 0.3s var(--ease), transform 0.16s var(--ease);
+}
+.film-toggle::before { content: ""; box-sizing: border-box; width: 12px; height: 14px; border-inline: 4px solid currentColor; }
+.film-toggle[data-state="paused"]::before { width: 0; height: 0; margin-left: 3px; border-style: solid; border-width: 7px 0 7px 12px; border-color: transparent transparent transparent currentColor; }
+.film-toggle:active { transform: scale(0.94); }
+.film-toggle:focus-visible { border-radius: 999px; }
+@media (hover: hover) and (pointer: fine) { .film-toggle:hover { background: rgba(244, 235, 221, 0.16); } }
+@media (max-width: 860px) { .film-toggle { top: 0.75rem; right: -3.4rem; } }
+
 /* Blocks rise a little less far and a little sooner; with scripting off they are simply there */
 .rise { transform: translateY(1.25rem); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
 @media (scripting: none) { .rise { opacity: 1; transform: none; } }
